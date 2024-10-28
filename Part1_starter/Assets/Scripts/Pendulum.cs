@@ -65,7 +65,16 @@ public class Pendulum : MonoBehaviour {
     Vector2 PendulumDynamics(Vector2 input_state)
     {
         // change here (hint: use the variable input_state here, not the "state" variable defined above)
-        return new Vector2(0.0f, 0.0f);
+        Vector2 new_state = new Vector2(0.0f, 0.0f);
+        float theta = input_state[0];
+        float omega = input_state[1];
+
+        float dtheta = omega;
+        float domega = -c * omega - omega_sqr * Mathf.Sin(theta);
+
+        new_state[0] = dtheta;
+        new_state[1] = domega;
+        return new_state;
     }
 
     void OdeStep()
