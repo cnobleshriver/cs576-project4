@@ -98,6 +98,11 @@ public class Pendulum : MonoBehaviour {
         else if (ode_method == "rk")
         {
 			// implement the Runge-Kutta variant (RK4)
+            Vector2 k1 = time_step_h * PendulumDynamics(state);
+            Vector2 k2 = time_step_h * PendulumDynamics(state + k1 / 2.0f);
+            Vector2 k3 = time_step_h * PendulumDynamics(state + k2 / 2.0f);
+            Vector2 k4 = time_step_h * PendulumDynamics(state + k3);
+            state += (k1 + 2.0f * k2 + 2.0f * k3 + k4) / 6.0f;
         }
         else if (ode_method == "semi-implicit")
         {
