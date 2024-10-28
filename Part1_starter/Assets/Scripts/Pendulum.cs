@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
@@ -107,6 +108,10 @@ public class Pendulum : MonoBehaviour {
         else if (ode_method == "semi-implicit")
         {
 			// implement the symplectic method (also known as semi-implicit Euler method)
+            float omega = state[1];
+            float domega = PendulumDynamics(state)[1];
+            state[0] += time_step_h * omega;
+            state[1] += time_step_h * domega;
         }
         else
         {
