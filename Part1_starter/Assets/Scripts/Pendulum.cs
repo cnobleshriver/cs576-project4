@@ -52,9 +52,10 @@ public class Pendulum : MonoBehaviour {
     void FixedUpdate ()
     {
         // complete this function (measure kinetic, potential, total energy)
-        float kinetic_energy = 0.0f;    // change here
-        float potential_energy = 0.0f;  // change here
-        Debug.Log(kinetic_energy + potential_energy);
+        float kinetic_energy = 0.5f * mass * rod_length * rod_length * state[1] * state[1];
+        float potential_energy = mass * gravity_acceleration * rod_length * (1 - Mathf.Cos(state[0]));
+        float total_energy = kinetic_energy + potential_energy;
+        Debug.Log(total_energy);
 
         OdeStep();
         pendulum.transform.eulerAngles = new Vector3(0.0f, 0.0f,  state[0] * Mathf.Rad2Deg  );
